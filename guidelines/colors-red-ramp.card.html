@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x160" name="Red Ramp" subtitle="Deep → base → bright, for depth & states" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; font-family: var(--font-sans); background: var(--off-white); }
+  .row { display:flex; gap:0; padding:20px; }
+  .sw { flex:1; height:100px; display:flex; flex-direction:column; justify-content:flex-end; padding:10px; box-sizing:border-box; border:var(--keyline); }
+  .sw + .sw { border-left:0; }
+  .name { font-weight:700; font-size:13px; }
+  .hex { font-size:11px; opacity:.85; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw" style="background:var(--red-deep); color:#fff;"><span class="name">Red Deep</span><span class="hex">#7E0A1D · press</span></div>
+    <div class="sw" style="background:var(--red); color:#fff;"><span class="name">Red</span><span class="hex">#B70D2A · base</span></div>
+    <div class="sw" style="background:var(--red-bright); color:#fff;"><span class="name">Red Bright</span><span class="hex">#E01433 · hover</span></div>
+    <div class="sw" style="background:var(--red-tint); color:var(--near-black);"><span class="name">Red Tint</span><span class="hex">#F6D9DE · wash</span></div>
+    <div class="sw" style="background:var(--gold); color:var(--near-black);"><span class="name">Gold</span><span class="hex">#C8A24A · premium</span></div>
+  </div>
+</body>
+</html>

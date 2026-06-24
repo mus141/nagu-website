@@ -1,0 +1,23 @@
+<!-- @dsCard group="Brand" viewport="700x230" name="Product Imagery" subtitle="Warm, glossy, high-contrast hero food on dark slate" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; font-family: var(--font-sans); background:var(--ink-pure); padding:16px; }
+  .row { display:flex; gap:12px; }
+  .cell { flex:1; height:198px; border:2px solid rgba(242,242,242,.14); overflow:hidden; position:relative; background:var(--ink-900); }
+  .cell img { width:100%; height:100%; object-fit:cover; }
+  .cut { object-fit:contain !important; padding:14px; box-sizing:border-box; background:var(--near-black); }
+  .lab { position:absolute; bottom:0; left:0; right:0; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--off-white); background:linear-gradient(to top, rgba(12,12,12,.9), transparent); padding:18px 10px 8px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="cell"><img src="../assets/products/double-smash.jpeg" alt=""><span class="lab">Hero shot · slate</span></div>
+    <div class="cell"><img class="cut" src="../assets/products/double-smash.png" alt=""><span class="lab">Transparent cut-out</span></div>
+    <div class="cell"><img src="../assets/lifestyle/skyline-night.jpeg" alt=""><span class="lab">Jeddah · red neon</span></div>
+  </div>
+</body>
+</html>

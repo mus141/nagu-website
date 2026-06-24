@@ -1,0 +1,49 @@
+<!-- @dsCard group="Components" viewport="700x320" name="Forms — Input, QtyStepper" subtitle="Hard-keyline field with stamp-focus + quantity stepper" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin:0; font-family: var(--font-sans); background: var(--off-white); color: var(--near-black); padding:24px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+  .lbl { font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-400); margin-bottom:12px; }
+  .row { display:flex; align-items:center; gap:18px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Input, QtyStepper } = window.NAGUDesignSystem_56f253;
+  function Demo() {
+    const [q, setQ] = React.useState(2);
+    return (
+      <div>
+        <div className="grid">
+          <div>
+            <div className="lbl">Input</div>
+            <div style={{display:'flex', flexDirection:'column', gap:16}}>
+              <Input label="Your name" placeholder="Type it" />
+              <Input label="Promo code" defaultValue="NAGU10" error="Code expired" />
+            </div>
+          </div>
+          <div>
+            <div className="lbl">QtyStepper</div>
+            <div style={{display:'flex', flexDirection:'column', gap:16, alignItems:'flex-start'}}>
+              <QtyStepper value={q} onChange={setQ} size="sm" />
+              <QtyStepper value={q} onChange={setQ} />
+              <QtyStepper value={q} onChange={setQ} size="lg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

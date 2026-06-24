@@ -1,0 +1,35 @@
+<!-- @dsCard group="Colors" viewport="700x160" name="Ink & Paper Neutrals" subtitle="Near-black ramp and warm paper ramp" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; font-family: var(--font-sans); background: var(--off-white); }
+  .wrap { padding:18px 20px; display:flex; flex-direction:column; gap:8px; }
+  .row { display:flex; }
+  .sw { flex:1; height:46px; display:flex; align-items:flex-end; padding:6px 8px; box-sizing:border-box; border:var(--keyline); font-size:10px; font-weight:600; }
+  .sw + .sw { border-left:0; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row">
+      <div class="sw" style="background:var(--ink-pure); color:#fff;">Pure 0C0C0C</div>
+      <div class="sw" style="background:var(--ink-900); color:#fff;">900</div>
+      <div class="sw" style="background:var(--ink-800); color:#fff;">800 · 1E1E1E</div>
+      <div class="sw" style="background:var(--ink-700); color:#fff;">700</div>
+      <div class="sw" style="background:var(--ink-600); color:#fff;">600</div>
+      <div class="sw" style="background:var(--ink-500); color:#fff;">500</div>
+      <div class="sw" style="background:var(--ink-400); color:#fff;">400</div>
+    </div>
+    <div class="row">
+      <div class="sw" style="background:var(--paper-0); color:var(--near-black);">0 · FFF</div>
+      <div class="sw" style="background:var(--paper-50); color:var(--near-black);">50 · F2F2F2</div>
+      <div class="sw" style="background:var(--paper-100); color:var(--near-black);">100</div>
+      <div class="sw" style="background:var(--paper-200); color:var(--near-black);">200 · DCD2C8</div>
+      <div class="sw" style="background:var(--paper-300); color:var(--near-black);">300</div>
+    </div>
+  </div>
+</body>
+</html>

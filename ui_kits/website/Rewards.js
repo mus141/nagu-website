@@ -1,0 +1,48 @@
+(() => {
+  const { Page, Section, Kicker, BigHead, Btn, Icon, RED, INK, PAPER } = window.NAGUSite;
+  const { Tag } = window.NAGUDesignSystem_56f253;
+  const GOLD = "#C8A24A";
+  const STEPS = [
+    { icon: "user-plus", t: "Sign up", d: "Join free in the app or online. Your card lives in your pocket." },
+    { icon: "utensils", t: "Order & earn", d: "Every SR spent earns points, whether in-store, takeaway, or delivery." },
+    { icon: "gift", t: "Redeem", d: "Cash points for free food, exclusive merch, and drop access." }
+  ];
+  const TIERS = [
+    {
+      name: "Street",
+      jp: "\u30B9\u30C8\u30EA\u30FC\u30C8",
+      req: "0 pts",
+      accent: "#141414",
+      perks: ["1 pt per SR", "Birthday reward", "Member-only offers"]
+    },
+    {
+      name: "Crew",
+      jp: "\u30AF\u30EB\u30FC",
+      req: "1,500 pts",
+      accent: RED,
+      featured: true,
+      perks: ["1.5 pts per SR", "Free side every month", "Early drop access", "All Street perks"]
+    },
+    {
+      name: "Verse",
+      jp: "\u30F4\u30A1\u30FC\u30B9",
+      req: "5,000 pts",
+      accent: GOLD,
+      perks: ["2 pts per SR", "Free combo every month", "First-access drops + merch", "Exclusive collectibles", "All Crew perks"]
+    }
+  ];
+  const PERKS = [
+    { icon: "zap", t: "Points on everything", d: "Earn on every order, every channel." },
+    { icon: "bell", t: "Early drop access", d: "Cop limited drops before they go public." },
+    { icon: "gift", t: "Free food", d: "Redeem points for the builds you love." },
+    { icon: "star", t: "Exclusive merch", d: "Member-only apparel and collectibles." }
+  ];
+  function TierCard({ t }) {
+    const dark = t.accent !== GOLD;
+    return /* @__PURE__ */ React.createElement("div", { style: { background: t.featured ? "#0a0a0a" : "#fff", border: `2px solid ${t.accent}`, boxShadow: `7px 7px 0 0 ${t.accent}`, padding: 26, display: "flex", flexDirection: "column", position: "relative" } }, t.featured && /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", top: -13, left: 22 } }, /* @__PURE__ */ React.createElement(Tag, { tone: "red" }, "Most Popular")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "baseline", justifyContent: "space-between" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 900, fontSize: 30, lineHeight: 1, color: t.featured ? "#fff" : INK } }, t.name), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-jp)", fontSize: 13, color: t.accent === GOLD ? GOLD : t.featured ? "rgba(255,255,255,.6)" : "#9a9a9a" } }, t.jp)), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 13, letterSpacing: ".08em", textTransform: "uppercase", color: t.accent === GOLD ? GOLD : RED, marginTop: 8 } }, t.req), /* @__PURE__ */ React.createElement("div", { style: { height: 2, background: t.accent, margin: "18px 0", opacity: 0.5 } }), /* @__PURE__ */ React.createElement("ul", { style: { listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 12, flex: 1 } }, t.perks.map((p) => /* @__PURE__ */ React.createElement("li", { key: p, style: { display: "flex", alignItems: "flex-start", gap: 10, fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.45, color: t.featured ? "rgba(255,255,255,.82)" : "#3a3a3a" } }, /* @__PURE__ */ React.createElement("span", { style: { color: t.accent === GOLD ? GOLD : RED, flex: "0 0 auto", marginTop: 1 } }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 17 })), p))));
+  }
+  function RewardsPage() {
+    return /* @__PURE__ */ React.createElement(Page, { active: "rewards" }, /* @__PURE__ */ React.createElement(Section, { bg: "poster", className: "nw-section--hero", style: { overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { "aria-hidden": "true", style: { position: "absolute", right: -20, top: -30, fontFamily: "var(--font-jp)", fontSize: "min(190px,26vw)", color: "rgba(255,255,255,.04)", lineHeight: 0.8, pointerEvents: "none" } }, "\u7279\u5178"), /* @__PURE__ */ React.createElement(Kicker, { en: "Rewards", jp: "\u7279\u5178 / Loyalty", light: true }), /* @__PURE__ */ React.createElement("h1", { className: "nw-h1", style: { color: "#fff", marginTop: 14 } }, "Eat. Earn.", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--nw-red)" } }, "repeat.")), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-sans)", fontSize: 18, lineHeight: 1.55, color: "rgba(255,255,255,.72)", maxWidth: 560, marginTop: 18 } }, "The NAGU rewards program turns repeat orders into free food, early drops, and member-only merch. Free to join. Built for regulars."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement(Btn, { kind: "red", size: "lg", href: "#join" }, "Join Free"), /* @__PURE__ */ React.createElement(Btn, { kind: "outline", onLight: false, size: "lg", href: "order.html" }, "Start Earning"))), /* @__PURE__ */ React.createElement(Section, { bg: "paper" }, /* @__PURE__ */ React.createElement(Kicker, { en: "How It Works", jp: "\u4ED5\u7D44\u307F" }), /* @__PURE__ */ React.createElement(BigHead, null, "Three steps to free food."), /* @__PURE__ */ React.createElement("div", { className: "nw-grid nw-grid-3", style: { marginTop: 34 } }, STEPS.map((s, i) => /* @__PURE__ */ React.createElement("div", { key: s.t, style: { background: "#fff", border: "2px solid #141414", boxShadow: "6px 6px 0 0 #141414", padding: 24 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { width: 46, height: 46, display: "inline-flex", alignItems: "center", justifyContent: "center", background: RED, color: "#fff", border: "2px solid #000" } }, /* @__PURE__ */ React.createElement(Icon, { name: s.icon, size: 22 })), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 34, color: "rgba(20,20,20,.14)" } }, "0", i + 1)), /* @__PURE__ */ React.createElement("div", { className: "nw-h3", style: { color: INK, marginTop: 16 } }, s.t), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.6, color: "#3a3a3a", marginTop: 10 } }, s.d))))), /* @__PURE__ */ React.createElement(Section, { bg: "ink" }, /* @__PURE__ */ React.createElement(Kicker, { en: "The Tiers", jp: "\u30E9\u30F3\u30AF", light: true }), /* @__PURE__ */ React.createElement(BigHead, { light: true }, "Climb the verse."), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.7)", marginTop: 14, maxWidth: 560 } }, "The more you eat, the more you unlock. Three tiers, from first order to full verse."), /* @__PURE__ */ React.createElement("div", { className: "nw-grid nw-grid-3", style: { marginTop: 38, alignItems: "stretch" } }, TIERS.map((t) => /* @__PURE__ */ React.createElement(TierCard, { key: t.name, t })))), /* @__PURE__ */ React.createElement(Section, { bg: "paper" }, /* @__PURE__ */ React.createElement(Kicker, { en: "Member Perks", jp: "\u7279\u5178" }), /* @__PURE__ */ React.createElement(BigHead, null, "What you unlock."), /* @__PURE__ */ React.createElement("div", { className: "nw-grid nw-grid-4", style: { marginTop: 32 } }, PERKS.map((p) => /* @__PURE__ */ React.createElement("div", { key: p.t, style: { background: "#fff", border: "2px solid #141414", boxShadow: "4px 4px 0 0 #141414", padding: 22 } }, /* @__PURE__ */ React.createElement("span", { style: { color: RED } }, /* @__PURE__ */ React.createElement(Icon, { name: p.icon, size: 26 })), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 900, fontSize: 17, color: INK, marginTop: 14 } }, p.t), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-sans)", fontSize: 13.5, lineHeight: 1.55, color: "#3a3a3a", marginTop: 8 } }, p.d))))), /* @__PURE__ */ React.createElement(Section, { bg: "red", style: { textAlign: "center" } }, /* @__PURE__ */ React.createElement("div", { id: "join", style: { position: "relative", top: -90 } }), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "var(--font-jp)", fontSize: 16, letterSpacing: ".14em", color: "rgba(255,255,255,.8)" } }, "\u4ECA\u3059\u3050\u53C2\u52A0"), /* @__PURE__ */ React.createElement("h2", { className: "nw-h2", style: { color: "#fff", marginTop: 10 } }, "Join the rewards."), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.55, color: "rgba(255,255,255,.85)", maxWidth: 480, margin: "16px auto 0" } }, "Free to join. Start earning on your very next order."), /* @__PURE__ */ React.createElement("form", { onSubmit: (e) => e.preventDefault(), style: { display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", maxWidth: 520, margin: "24px auto 0" } }, /* @__PURE__ */ React.createElement("input", { type: "email", required: true, placeholder: "you@email.com", "aria-label": "Email address", style: { flex: "1 1 240px" } }), /* @__PURE__ */ React.createElement("button", { type: "submit", className: "nw-btn nw-btn--ink nw-btn--lg" }, "Join Free"))));
+  }
+  ReactDOM.createRoot(document.getElementById("page")).render(/* @__PURE__ */ React.createElement(RewardsPage, null));
+})();

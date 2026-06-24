@@ -1,0 +1,405 @@
+/* ============================================================
+   NAGU WEBSITE — shared layout + responsive system
+   Loaded by every page AFTER styles.css. Provides the
+   responsive grid, container, header/nav, footer and section
+   helpers used by the shared chrome (shared.jsx) and pages.
+   Brand visuals stay inline in JSX; this file owns LAYOUT +
+   BREAKPOINTS (media queries can't live in inline styles).
+   Breakpoints: desktop > 960px, tablet 641–960px, mobile <=640px
+   ============================================================ */
+
+:root {
+  --nw-red: #C8102E;          /* punchy poster red — FILLS only (3.37:1 on dark: fails AA as text) */
+  --nw-red-bright: #E0182F;
+  --nw-red-text: #FF3344;     /* AA-safe red for small text on near-black grounds (>=4.5:1 on #0a0a0a) */
+  --nw-ink: #141414;
+  --nw-paper: #ECE7DD;
+  --nw-gold: #C8A24A;         /* rare premium accent (collectibles) */
+  --nw-max: 1200px;
+  --nw-gutter: clamp(20px, 5vw, 64px);
+  --nw-header-h: 72px;
+
+  /* 4pt spacing scale — semantic names, used by the chrome + helpers */
+  --space-2: 2px;  --space-1: 4px;  --space-2x: 8px; --space-3: 12px;
+  --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px;
+  --space-8: 64px; --space-9: 96px;
+
+  /* semantic z-index scale (no arbitrary 999s) */
+  --z-base: 1; --z-sticky: 40; --z-header: 90; --z-drawer: 95; --z-float: 100;
+
+  /* offset-block shadow scale (brand signature: hard, no blur) */
+  --shadow-sm: 4px 4px 0 0 var(--nw-ink);
+  --shadow-md: 6px 6px 0 0 var(--nw-ink);
+  --shadow-lg: 8px 8px 0 0 var(--nw-ink);
+
+  --ease-out: cubic-bezier(.2, .8, .2, 1);  /* snappy, no bounce (brand motion) */
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: #0a0a0a; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+a { color: inherit; }
+img { max-width: 100%; }
+/* overflow safety: long words / flex+grid children never blow out the layout */
+.nw-grid > *, .nw-split > * { min-width: 0; }
+p, li, figcaption { overflow-wrap: break-word; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: var(--nw-red); }
+
+/* ---- accessible focus ring (keyboard only) ---- */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--nw-red-bright);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* ---- reduced motion: collapse all animation/transition ---- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- container + full-bleed section ---- */
+.nw-container { width: 100%; max-width: var(--nw-max); margin: 0 auto; padding-inline: var(--nw-gutter); }
+/* default band rhythm; heroes get more air so they dominate the squint test */
+.nw-section { width: 100%; padding-block: clamp(48px, 8vw, 92px); }
+.nw-section--hero { padding-block: clamp(64px, 11vw, 132px); }
+
+/* ---- responsive display headings (clamp the poster type) ----
+   line-height stays >= 1.0: the distressed display face has tall grunge
+   extents, so anything tighter makes wrapped lines overlap top/bottom.
+   balance keeps wrapped headline lines even instead of one orphan word. */
+.nw-h1 { font-family: var(--font-display); text-transform: uppercase; font-weight: 900; line-height: 1.05; letter-spacing: .01em; font-size: clamp(44px, 7.5vw, 104px); margin: 0; text-wrap: balance; }
+.nw-h2 { font-family: var(--font-display); text-transform: uppercase; font-weight: 900; line-height: 1.06; letter-spacing: .01em; font-size: clamp(32px, 5vw, 60px); margin: 0; text-wrap: balance; }
+.nw-h3 { font-family: var(--font-display); text-transform: uppercase; font-weight: 900; line-height: 1.08; letter-spacing: .02em; font-size: clamp(22px, 3vw, 36px); margin: 0; text-wrap: balance; }
+
+/* ---- prose: cap measure ~66ch, reduce orphans ---- */
+.nw-prose { max-width: 64ch; text-wrap: pretty; }
+
+/* ---- button system: one set of states for the whole site ----
+   (Btn in shared.jsx applies these classes; brand press "stamps down".) */
+.nw-btn {
+  display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+  font-family: var(--font-display); text-transform: uppercase; font-weight: 900;
+  letter-spacing: .04em; font-size: 16px; padding: 14px 22px;
+  border: 2px solid; border-radius: 2px; line-height: 1; text-decoration: none;
+  transition: background-color .14s var(--ease-out), color .14s var(--ease-out), transform .08s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.nw-btn--lg { font-size: 19px; padding: 17px 28px; }
+.nw-btn--red { background: var(--nw-red); color: #fff; border-color: var(--nw-red); }
+.nw-btn--red:hover { background: var(--nw-red-bright); border-color: var(--nw-red-bright); }
+.nw-btn--outline { background: transparent; color: var(--nw-ink); border-color: var(--nw-ink); }
+.nw-btn--outline:hover { background: var(--nw-ink); color: #fff; }
+.nw-btn--outline.nw-btn--on-dark { color: #fff; border-color: #fff; }
+.nw-btn--outline.nw-btn--on-dark:hover { background: #fff; color: var(--nw-ink); }
+.nw-btn--ink { background: var(--nw-ink); color: #fff; border-color: #0a0a0a; }
+.nw-btn--ink:hover { background: #000; }
+.nw-btn:active { transform: translateY(2px); }   /* press stamps down */
+.nw-btn .nw-btn-arrow { font-family: var(--font-sans); font-weight: 700; }
+
+/* ---- form inputs (scoped to website pages) ---- */
+#page input, #page textarea {
+  font-family: var(--font-sans); font-size: 16px; padding: 15px 18px;
+  border: 2px solid #000; background: #fff; color: var(--nw-ink);
+  border-radius: 2px; width: 100%;
+  transition: box-shadow .14s var(--ease-out), border-color .14s var(--ease-out);
+}
+#page textarea { resize: vertical; }
+#page input::placeholder, #page textarea::placeholder { color: #6a6a6a; }   /* >=4.5:1 on white */
+#page input:focus, #page textarea:focus { outline: none; border-color: var(--nw-red); box-shadow: 0 0 0 3px rgba(200,16,46,.25); }
+
+/* ---- responsive grids ---- */
+.nw-grid { display: grid; gap: clamp(16px, 2.4vw, 24px); }
+.nw-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.nw-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.nw-grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 960px) {
+  .nw-grid-3, .nw-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .nw-grid-2, .nw-grid-3, .nw-grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ---- visibility helpers ---- */
+.nw-only-desktop { display: revert; }
+.nw-only-mobile  { display: none; }
+@media (max-width: 860px) {
+  .nw-only-desktop { display: none !important; }
+  .nw-only-mobile  { display: revert !important; }
+}
+
+/* ---- HEADER / NAV ---- */
+.nw-header {
+  position: sticky; top: 0; z-index: 90;
+  background: rgba(10,10,10,.92); backdrop-filter: blur(6px);
+  border-bottom: 2px solid #000;
+}
+.nw-header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+.nw-logo { height: 34px; display: block; }
+.nw-navlinks { display: flex; align-items: center; gap: 28px; }
+.nw-navlink {
+  text-decoration: none; color: #fff; font-family: var(--font-display);
+  text-transform: uppercase; font-weight: 900; font-size: 16px; letter-spacing: .03em;
+  border-bottom: 3px solid transparent; padding-bottom: 3px; white-space: nowrap;
+  transition: color .14s, border-color .14s;
+}
+.nw-navlink:hover { color: var(--nw-red-bright); }
+.nw-navlink[data-active="true"] { border-bottom-color: var(--nw-red); }
+.nw-burger { transition: border-color .14s var(--ease-out), background-color .14s var(--ease-out); }
+.nw-burger:hover { border-color: var(--nw-red); }
+.nw-burger:active { transform: translateY(1px); }
+
+.nw-burger {
+  display: none; background: none; border: 2px solid rgba(255,255,255,.3);
+  color: #fff; width: 44px; height: 40px; align-items: center; justify-content: center; cursor: pointer; border-radius: 2px;
+}
+.nw-burger svg { pointer-events: none; }
+@media (max-width: 860px) {
+  .nw-navlinks.nw-desk { display: none; }
+  .nw-burger { display: inline-flex; }
+}
+
+/* ---- mobile drawer ---- */
+.nw-drawer { position: fixed; inset: 0; z-index: 95; display: none; }
+.nw-drawer[data-open="true"] { display: block; }
+.nw-drawer-scrim { position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+.nw-drawer-panel {
+  position: absolute; top: 0; right: 0; bottom: 0; width: min(82vw, 340px);
+  background: #0c0c0c; border-left: 2px solid var(--nw-red);
+  padding: 24px; display: flex; flex-direction: column; gap: 6px;
+}
+.nw-drawer-link {
+  text-decoration: none; color: #fff; font-family: var(--font-display); text-transform: uppercase;
+  font-weight: 900; font-size: 26px; letter-spacing: .02em; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.nw-drawer-link[data-active="true"] { color: var(--nw-red); }
+
+/* ---- FOOTER ---- */
+.nw-foot-grid { display: grid; grid-template-columns: 1.3fr repeat(4, 1fr); gap: 40px; }
+@media (max-width: 960px) { .nw-foot-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .nw-foot-grid { grid-template-columns: 1fr; gap: 28px; } }
+.nw-foot-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+/* footer links: real tap target + hover, low-key until hovered */
+.nw-footlink { display: inline-block; padding-block: 4px; color: rgba(255,255,255,.72); text-decoration: none; transition: color .14s var(--ease-out); }
+.nw-footlink:hover { color: #fff; }
+.nw-social { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,.3); color: #fff; transition: border-color .14s var(--ease-out), color .14s var(--ease-out); }
+.nw-social:hover { border-color: var(--nw-red); color: var(--nw-red-bright); }
+
+/* ---- generic row that stacks on mobile ---- */
+.nw-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+@media (max-width: 860px) { .nw-split { grid-template-columns: 1fr; } }
+
+/* ---- two-column form that stacks on mobile ---- */
+.nw-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 640px) { .nw-form { grid-template-columns: 1fr; } }
+
+/* ---- floating Order Now CTA ---- */
+.nw-sticky-order {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--nw-red); color: #fff; border: 2px solid #0a0a0a; border-radius: 2px;
+  font-family: var(--font-display); text-transform: uppercase; font-weight: 900;
+  font-size: 17px; letter-spacing: .04em; padding: 15px 24px; text-decoration: none;
+  box-shadow: 0 10px 30px rgba(200,16,46,.5);
+  transition: background-color .14s var(--ease-out), transform .08s var(--ease-out), box-shadow .14s var(--ease-out);
+}
+.nw-sticky-order:hover { background: var(--nw-red-bright); box-shadow: 0 14px 38px rgba(200,16,46,.6); }
+.nw-sticky-order:active { transform: translateY(2px); box-shadow: 0 6px 20px rgba(200,16,46,.5); }
+
+/* ============================================================
+   MOTION — loading screen, page-transition wipe, scroll reveal,
+   smooth-scroll (Lenis). Built by boot.js + motion.js.
+   ============================================================ */
+
+/* ---- smooth scroll (Lenis) ---- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ---- loading screen / page-transition overlay ----
+   Covers the page on load (over the in-browser Babel compile), fills the
+   bottom bar to 100%, then slides up (.is-out) sweeping the red bar across
+   the page. On internal nav it slides back down to cover, then navigates. */
+.nw-loader {
+  position: fixed; inset: 0; z-index: 1000; background: #0a0a0a;
+  display: flex; align-items: center; justify-content: center;
+  transform: translateY(0); transition: transform .6s var(--ease-out);
+}
+.nw-loader.is-out { transform: translateY(-100%); }
+.nw-loader.is-leaving { transform: translateY(-100%); transition: none; }
+.nw-loader-center { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.nw-loader-logo { height: clamp(48px, 8vw, 66px); filter: brightness(0) invert(1); }
+.nw-loader-jp { font-family: var(--font-jp); color: var(--nw-red-text); letter-spacing: .28em; font-size: 13px; }
+.nw-loader-pct {
+  position: absolute; right: clamp(18px, 4vw, 48px); bottom: clamp(30px, 4vw, 44px);
+  color: var(--nw-red); font-family: var(--font-display); font-weight: 900;
+  line-height: .85; font-size: clamp(46px, 8vw, 96px); display: flex; align-items: flex-start;
+}
+.nw-loader-sign { font-size: .42em; margin-top: .35em; }
+.nw-loader-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 16px; background: rgba(255,255,255,.08); }
+.nw-loader-fill { height: 100%; width: 0%; background: var(--nw-red); transition: width .25s var(--ease-out); }
+
+/* ---- scroll reveal (only when JS active; default = visible) ----
+   The hidden state uses :not(.nw-in) so the moment an element is revealed the
+   hide rule stops matching entirely — revealed content can never get stuck
+   invisible from a cascade tie. */
+.nw-reveal { transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+.js-on .nw-reveal:not(.nw-in) { opacity: 0; transform: translateY(26px); }
+@media (prefers-reduced-motion: reduce) {
+  .js-on .nw-reveal:not(.nw-in) { opacity: 1; transform: none; }
+  .nw-loader { transition: none; }
+}
+
+/* =====================================================================
+   MENU CARD — food card with a hover-revealed nutrition panel
+   ===================================================================== */
+.nw-menucard {
+  display: flex; flex-direction: column; background: var(--paper-0, #fff);
+  border: 2px solid #141414; border-radius: 2px; box-shadow: 4px 4px 0 0 #141414;
+  overflow: hidden; outline: none;
+  transition: transform .16s var(--ease-out), box-shadow .16s var(--ease-out);
+}
+.nw-menucard:hover, .nw-menucard:focus-visible {
+  transform: translate(-3px, -3px); box-shadow: 9px 9px 0 0 #141414;
+}
+.nw-menucard:focus-visible { outline: 3px solid var(--nw-red); outline-offset: 3px; }
+.nw-menucard-media {
+  position: relative; aspect-ratio: 4 / 3; background: #0a0a0a;
+  border-bottom: 2px solid #141414; overflow: hidden;
+}
+.nw-menucard-media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .5s var(--ease-out);
+}
+.nw-menucard:hover .nw-menucard-media img,
+.nw-menucard:focus-within .nw-menucard-media img { transform: scale(1.06); }
+.nw-menucard-price {
+  position: absolute; top: 10px; right: 10px; z-index: 2;
+  background: var(--nw-red); color: #fff; border: 2px solid #0a0a0a;
+  font-family: var(--font-display); font-weight: 900; font-size: 15px;
+  letter-spacing: .02em; padding: 5px 9px; line-height: 1;
+}
+.nw-menucard-info {
+  position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column;
+  justify-content: flex-end; gap: 8px; padding: 18px;
+  background: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,.55) 35%, rgba(10,10,10,.94) 100%);
+  color: #fff; transform: translateY(101%);
+  transition: transform .34s var(--ease-out); will-change: transform;
+}
+.nw-menucard:hover .nw-menucard-info,
+.nw-menucard:focus-within .nw-menucard-info { transform: translateY(0); }
+.nw-menucard-desc {
+  font-family: var(--font-sans); font-size: 13px; line-height: 1.5;
+  color: rgba(255,255,255,.92); margin: 0;
+}
+.nw-menucard-facts { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; }
+.nw-menucard-facts dt {
+  font-family: var(--font-display); text-transform: uppercase; font-weight: 900;
+  font-size: 10px; letter-spacing: .14em; color: var(--nw-red-text); align-self: start; padding-top: 1px;
+}
+.nw-menucard-facts dd {
+  margin: 0; font-family: var(--font-sans); font-size: 12px; line-height: 1.4;
+  color: rgba(255,255,255,.82);
+}
+.nw-menucard-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.nw-menucard-name {
+  font-family: var(--font-display); text-transform: uppercase; font-weight: 900;
+  font-size: 24px; line-height: 1.04; letter-spacing: .01em; margin: 0; color: #141414;
+}
+.nw-menucard-tag { font-family: var(--font-sans); font-size: 13px; line-height: 1.45; color: #5a5a5a; margin: 0; }
+
+/* =====================================================================
+   FLIP CARD — collectible card, flips to its back on hover/focus
+   ===================================================================== */
+.nw-flip { perspective: 1400px; outline: none; }
+.nw-flip-inner {
+  position: relative; width: 100%; aspect-ratio: 433 / 600;
+  transform-style: preserve-3d; transition: transform .6s var(--ease-out);
+}
+.nw-flip:hover .nw-flip-inner, .nw-flip:focus-visible .nw-flip-inner { transform: rotateY(180deg); }
+.nw-flip:focus-visible { outline: 3px solid var(--nw-red); outline-offset: 4px; border-radius: 6px; }
+.nw-flip-face {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  display: block; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 5px; box-shadow: 0 18px 40px rgba(0,0,0,.5);
+}
+.nw-flip-back { transform: rotateY(180deg); }
+
+/* =====================================================================
+   STICKER TICKER — infinite right-to-left marquee of brand stickers
+   ===================================================================== */
+.nw-ticker { position: relative; overflow: hidden; width: 100%; padding: 18px 0; }
+.nw-ticker-track { display: flex; width: max-content; animation: nw-marquee 28s linear infinite; }
+.nw-ticker:hover .nw-ticker-track { animation-play-state: paused; }
+.nw-ticker-group { display: flex; align-items: center; flex: none; }
+.nw-sticker {
+  flex: none; display: inline-flex; align-items: center; gap: 10px; margin: 0 14px;
+  font-family: var(--font-display); text-transform: uppercase; font-weight: 900;
+  font-size: 17px; letter-spacing: .04em; padding: 11px 18px; line-height: 1;
+  border: 2px solid #0a0a0a; box-shadow: 3px 3px 0 0 #0a0a0a; white-space: nowrap;
+}
+.nw-sticker .nw-sticker-jp { font-family: var(--font-jp); font-size: 14px; letter-spacing: .08em; }
+.nw-sticker--red { background: var(--nw-red); color: #fff; }
+.nw-sticker--ink { background: #0a0a0a; color: #fff; }
+.nw-sticker--cream { background: var(--nw-paper, #ECE7DD); color: #141414; }
+.nw-sticker:nth-child(2n) { transform: rotate(-2deg); }
+.nw-sticker:nth-child(3n) { transform: rotate(1.5deg); }
+@keyframes nw-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* =====================================================================
+   LORE GALLERY — dynamic tiles: gentle float, hover zoom + sheen sweep
+   ===================================================================== */
+.nw-gallery-tile {
+  box-shadow: 0 14px 30px rgba(0,0,0,.45);
+  animation: nw-float 6s ease-in-out infinite;
+  transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+}
+.nw-gallery-tile img { transition: transform .6s var(--ease-out); }
+.nw-gallery-tile:hover {
+  transform: translateY(-6px) scale(1.015); box-shadow: 0 26px 50px rgba(0,0,0,.6);
+  animation-play-state: paused; z-index: 2;
+}
+.nw-gallery-tile:hover img { transform: scale(1.1); }
+.nw-gallery-glow {
+  position: absolute; inset: 0; border-radius: 5px; pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.22) 50%, transparent 65%);
+  transform: translateX(-120%); transition: transform .7s var(--ease-out);
+}
+.nw-gallery-tile:hover .nw-gallery-glow { transform: translateX(120%); }
+@keyframes nw-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+/* =====================================================================
+   DROP FEED CARD — interactive collab card (hover lift + image zoom)
+   ===================================================================== */
+.nw-dropcard {
+  background: #fff; border: 2px solid #141414; border-radius: 2px; box-shadow: 6px 6px 0 0 #141414;
+  display: flex; flex-direction: column; text-decoration: none; color: inherit; outline: none;
+  transition: transform .18s var(--ease-out), box-shadow .18s var(--ease-out);
+}
+.nw-dropcard:hover, .nw-dropcard:focus-visible { transform: translate(-3px,-3px); box-shadow: 11px 11px 0 0 #141414; }
+.nw-dropcard:focus-visible { outline: 3px solid var(--nw-red); outline-offset: 3px; }
+.nw-dropcard-media img { transition: transform .5s var(--ease-out); }
+.nw-dropcard:hover .nw-dropcard-media img { transform: scale(1.07); }
+.nw-dropcard-arrow { transition: transform .18s var(--ease-out); }
+.nw-dropcard:hover .nw-dropcard-arrow { transform: translateX(5px); }
+.nw-dropcard--tba {
+  background: #0f0f0f; border-color: rgba(255,255,255,.18); box-shadow: 6px 6px 0 0 rgba(255,255,255,.08);
+  align-items: center; justify-content: center; text-align: center; padding: 40px 22px; min-height: 280px;
+}
+.nw-dropcard--tba:hover { transform: translate(-3px,-3px); box-shadow: 11px 11px 0 0 rgba(255,255,255,.12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nw-ticker-track { animation: none; }
+  .nw-flip-inner, .nw-menucard, .nw-menucard-media img, .nw-menucard-info { transition: none; }
+  .nw-gallery-tile { animation: none; }
+  .nw-dropcard, .nw-dropcard-media img, .nw-dropcard-arrow { transition: none; }
+}

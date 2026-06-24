@@ -1,0 +1,34 @@
+/* ============================================================
+   NAGU — Webfonts
+   Three faces, dual-language system (EN primary + JP accents).
+   ============================================================ */
+
+/* Primary English — distressed condensed display caps.
+   Headlines, hero type, posters, logo-adjacent shout text. */
+@font-face {
+  font-family: "Nagu Display";
+  src: url("../assets/fonts/Nagu-English-Primary.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Secondary English — clean geometric sans.
+   Body copy, UI labels, captions, anything that needs to read clean. */
+@font-face {
+  font-family: "Nagu Sans";
+  src: url("../assets/fonts/Nagu-English-Secondary.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Japanese accent — angular katakana / kanji + latin.
+   Decorative dual-language callouts only (大胆な味 / Bold Flavor). */
+@font-face {
+  font-family: "Nagu JP";
+  src: url("../assets/fonts/Nagu-Japanese.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}

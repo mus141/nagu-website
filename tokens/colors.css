@@ -1,0 +1,65 @@
+/* ============================================================
+   NAGU — Color
+   Street-pop palette: NAGU Red + Near Black + Off-White + Cream.
+   High-contrast, poster-grade. Red is loud; black is the canvas.
+   ============================================================ */
+:root {
+  /* ---- Brand core (from brand book) ---- */
+  --nagu-red:        #B70D2A;  /* Primary — NAGU Red */
+  --near-black:      #1E1E1E;  /* Secondary — Near Black */
+  --off-white:       #F2F2F2;  /* Tertiary — Off-White */
+  --cream:           #DCD2C8;  /* Support — Cream / Paper */
+
+  /* ---- Red ramp (derived, for states + depth) ---- */
+  --red-deep:        #7E0A1D;  /* pressed / shadow side of red */
+  --red:             #B70D2A;  /* base */
+  --red-bright:      #E01433;  /* hover lift / neon glow */
+  --red-tint:        #F6D9DE;  /* faint red wash on light surfaces */
+
+  /* ---- Ink ramp (near-black neutrals) ---- */
+  --ink-pure:        #0C0C0C;  /* deepest — full-bleed poster black */
+  --ink-900:         #161616;
+  --ink-800:         #1E1E1E;  /* = near-black */
+  --ink-700:         #2A2A2A;
+  --ink-600:         #3A3A3A;
+  --ink-500:         #5C5654;
+  --ink-400:         #847D78;
+
+  /* ---- Paper ramp (warm off-white → cream) ---- */
+  --paper-0:         #FFFFFF;
+  --paper-50:        #F2F2F2;  /* = off-white */
+  --paper-100:       #E9E4DD;
+  --paper-200:       #DCD2C8;  /* = cream */
+  --paper-300:       #C9BDB0;
+
+  /* ---- Accent (sampled from mascot IP — kimono gold) ---- */
+  --gold:            #C8A24A;  /* sparing collectible / premium accent */
+
+  /* ---- Semantic aliases ---- */
+  --bg-page:         var(--off-white);   /* default light canvas */
+  --bg-ink:          var(--ink-800);     /* default dark canvas */
+  --bg-poster:       var(--ink-pure);    /* full-bleed poster black */
+  --surface-card:    var(--paper-0);
+  --surface-card-ink:var(--ink-900);
+  --surface-sunken:  var(--paper-100);
+
+  --text-strong:     var(--near-black);  /* headlines on light */
+  --text-body:       #2A2A2A;            /* body on light */
+  --text-muted:      var(--ink-500);     /* captions, meta */
+  --text-on-ink:     var(--off-white);   /* body on dark */
+  --text-on-red:     var(--off-white);   /* text over red fills */
+  --text-brand:      var(--nagu-red);
+
+  --border-hard:     var(--near-black);  /* the signature hard black keyline */
+  --border-soft:     rgba(30,30,30,0.14);
+  --border-on-ink:   rgba(242,242,242,0.16);
+
+  --accent:          var(--nagu-red);
+  --accent-hover:    var(--red-bright);
+  --accent-press:    var(--red-deep);
+
+  /* ---- Status (kept tonal, never candy) ---- */
+  --success:         #2E7D46;
+  --warning:         #C8A24A;
+  --danger:          var(--nagu-red);
+}

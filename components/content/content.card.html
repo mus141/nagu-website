@@ -1,0 +1,48 @@
+<!-- @dsCard group="Components" viewport="700x440" name="Content — Card, ProductCard, CharacterCard" subtitle="Base surface · menu product · collectible mascot" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin:0; font-family: var(--font-sans); background: var(--off-white); color: var(--near-black); padding:24px; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:18px; align-items:start; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Card, ProductCard, CharacterCard, Button } = window.NAGUDesignSystem_56f253;
+  function Demo() {
+    return (
+      <div className="grid">
+        <ProductCard
+          image="../../assets/products/korean-beef-smash.jpeg"
+          name="Korean Beef Smash"
+          tagline="Savory, punchy, distinctive."
+          price={24}
+          tags={["Asian Twist", "Beef"]}
+          action={<Button block size="sm">Add</Button>}
+        />
+        <CharacterCard
+          image="../../assets/characters/biku.jpeg"
+          name="BIKU"
+          role="The Culture Creator"
+          jp="ビク"
+          number={1}
+        />
+        <Card tone="ink" interactive padding={18}>
+          <div style={{fontFamily:'var(--font-display)', textTransform:'uppercase', fontWeight:900, fontSize:24, lineHeight:.95}}>Every order is a brand moment.</div>
+          <p style={{fontSize:13, lineHeight:1.5, color:'var(--ink-400)', marginTop:10}}>Base Card surface — hover to lift, press to stamp.</p>
+        </Card>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!-- @dsCard group="Spacing" viewport="700x210" name="Radii & Hard Shadow" subtitle="Square corners + the signature offset block shadow" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; font-family: var(--font-sans); background: var(--off-white); color:var(--near-black); padding:26px; display:flex; gap:30px; align-items:center; }
+  .demo { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .box { width:88px; height:64px; background:var(--paper-0); border:var(--keyline); }
+  .lab { font-size:11px; font-weight:600; }
+  .r0 { border-radius:0; } .rsm { border-radius:4px; } .rmd { border-radius:8px; } .rlg { border-radius:14px; }
+  .shadow { box-shadow: var(--shadow-offset-lg); }
+  .shadowred { box-shadow: var(--shadow-offset-red); }
+</style>
+</head>
+<body>
+  <div class="demo"><div class="box r0"></div><span class="lab">radius 0 — default</span></div>
+  <div class="demo"><div class="box rsm"></div><span class="lab">4 — controls</span></div>
+  <div class="demo"><div class="box rmd"></div><span class="lab">8 — cards</span></div>
+  <div class="demo"><div class="box r0 shadow"></div><span class="lab">offset shadow</span></div>
+  <div class="demo"><div class="box r0 shadowred"></div><span class="lab">red shadow</span></div>
+</body>
+</html>

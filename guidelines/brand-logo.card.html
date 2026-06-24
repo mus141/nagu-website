@@ -1,0 +1,24 @@
+<!-- @dsCard group="Brand" viewport="700x260" name="Logo — Wordmark" subtitle="Primary (red+black) on cream · Secondary (one-color) on red" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; font-family: var(--font-sans); display:grid; grid-template-columns:1fr 1fr; }
+  .pane { height:240px; display:flex; align-items:center; justify-content:center; padding:30px; box-sizing:border-box; }
+  .cream { background:var(--cream); }
+  .red { background:var(--nagu-red); }
+  img { max-width:78%; max-height:130px; object-fit:contain; }
+  .tag { position:absolute; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin:0; }
+  .pane span { position:absolute; bottom:14px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+  .cream span { color:var(--ink-500); }
+  .red span { color:rgba(255,255,255,.85); }
+  .pane { position:relative; }
+</style>
+</head>
+<body>
+  <div class="pane cream"><img src="../assets/logos/Nagu-Logo-Primary.png" alt="NAGU primary logo"><span>Primary · on light/cream</span></div>
+  <div class="pane red"><img src="../assets/logos/Nagu-Logo-Secondary.png" alt="NAGU secondary logo"><span>Secondary · flexible</span></div>
+</body>
+</html>

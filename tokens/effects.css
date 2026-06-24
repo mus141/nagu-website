@@ -1,0 +1,40 @@
+/* ============================================================
+   NAGU — Effects: radii, borders, shadows, motion
+   Signature move: HARD black keyline + HARD offset shadow
+   (lifted straight from the graffiti wordmark). Corners stay
+   mostly square — street poster, not soft SaaS.
+   ============================================================ */
+:root {
+  /* ---- Radii (kept small / squared) ---- */
+  --radius-0:    0px;     /* default — posters & windows are sharp */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   14px;    /* max — pill cards / sauce sachets */
+  --radius-pill: 999px;   /* tags, chips */
+
+  /* ---- Borders ---- */
+  --border-w:        2px;   /* standard hard keyline */
+  --border-w-thick:  3px;   /* poster frames, hero blocks */
+  --keyline:         var(--border-w) solid var(--near-black);
+  --keyline-thick:   var(--border-w-thick) solid var(--near-black);
+
+  /* ---- Signature hard offset shadow (no blur, pure block) ---- */
+  --shadow-offset:      4px 4px 0 0 var(--near-black);
+  --shadow-offset-lg:   8px 8px 0 0 var(--near-black);
+  --shadow-offset-red:  6px 6px 0 0 var(--nagu-red);
+
+  /* ---- Soft shadows (used sparingly, e.g. floating UI on dark) ---- */
+  --shadow-sm:  0 1px 2px rgba(12,12,12,0.18);
+  --shadow-md:  0 6px 20px rgba(12,12,12,0.28);
+  --shadow-lg:  0 18px 48px rgba(12,12,12,0.40);
+
+  /* ---- Motion: snappy, kinetic, no float ---- */
+  --ease-snap:  cubic-bezier(0.2, 0.8, 0.2, 1); /* @kind other */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --dur-fast:   120ms; /* @kind other */
+  --dur-base:   200ms; /* @kind other */
+  --dur-slow:   360ms; /* @kind other */
+
+  /* ---- Texture overlays (brand grunge / halftone) ---- */
+  --texture-overlay: url("../assets/elements/texture-overlay.jpg"); /* @kind other */
+}

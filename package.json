@@ -1,0 +1,16 @@
+{
+  "name": "nagu-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NAGU marketing website — static site. JSX is precompiled to plain JS via esbuild (no in-browser Babel).",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "serve": "python3 serve.py",
+    "dev": "node build.mjs --watch & python3 serve.py"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

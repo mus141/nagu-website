@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Brand Core" subtitle="NAGU Red · Near Black · Off-White · Cream" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; font-family: var(--font-sans); background: var(--off-white); }
+  .row { display:flex; gap:0; padding:20px; }
+  .sw { flex:1; height:130px; border:var(--keyline); display:flex; flex-direction:column; justify-content:flex-end; padding:12px; box-sizing:border-box; }
+  .sw + .sw { border-left:0; }
+  .name { font-weight:700; font-size:14px; letter-spacing:.02em; }
+  .hex { font-size:12px; opacity:.8; font-variant-numeric:tabular-nums; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw" style="background:var(--nagu-red); color:var(--off-white);"><span class="name">NAGU Red</span><span class="hex">#B70D2A</span></div>
+    <div class="sw" style="background:var(--near-black); color:var(--off-white);"><span class="name">Near Black</span><span class="hex">#1E1E1E</span></div>
+    <div class="sw" style="background:var(--off-white); color:var(--near-black);"><span class="name">Off-White</span><span class="hex">#F2F2F2</span></div>
+    <div class="sw" style="background:var(--cream); color:var(--near-black);"><span class="name">Cream / Paper</span><span class="hex">#DCD2C8</span></div>
+  </div>
+</body>
+</html>
